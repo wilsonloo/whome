@@ -1,0 +1,33 @@
+.column-comments {
+	text-align: center;
+	width:auto;
+}
+
+/* List table styles */
+.post-com-count-wrapper {
+	min-width: 22px;
+	max-width: 100px;
+	font-family: sans-serif;
+}
+
+/* all posts */
+td.post-title strong {
+	display: block;
+	margin-bottom: .2em;
+}
+
+td.post-title p {
+	margin: 6px 0;
+}
+
+.column-title {
+	word-wrap: break-word;
+	max-width:100px;
+	padding:4px 7px 2px 7px;
+}
+
+.all-post-tr {
+	border-collapse:separate;
+	border-spacing:2px;
+	border-color:gray;
+}

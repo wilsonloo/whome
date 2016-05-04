@@ -1,0 +1,66 @@
+<html class="no-js">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--<script src="./res_inner/hm.js"></script>-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Whome</title>
+
+    <!-- 使用url函数转换相关路径 -->
+    <link rel="stylesheet" href="/css/normalize.min.css">
+    <link rel="stylesheet" href="/css/grid.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- 通过自有函数输出HTML头部信息 -->
+    <meta name="description" content="Times never stop to cry ...">
+	<meta name="keywords" content="whome,wilson-loo,github,源码">
+	<meta name="template" content="default">
+</head>
+<body>
+
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="row">
+			<!-- 站名 -->
+            <div class="site-name col-mb-12 col-9">
+                <a id="logo" href="./惊蛰-云风skynet_files/惊蛰-云风skynet.html">
+                                        潜龙在野                </a>
+        	    <p class="description">Times never stop to cry ...</p>
+            </div>
+			
+			<!-- 搜索 -->
+            <div class="site-search col-3 kit-hidden-tb">
+                <form id="search" method="post" action="./惊蛰-云风skynet_files/惊蛰-云风skynet.html" role="search">
+                    <label for="s" class="sr-only">搜索关键字</label>
+                    <input type="text" name="s" class="text" placeholder="输入关键字搜索">
+                    <button type="submit" class="submit">搜索</button>
+                </form>
+            </div>
+			
+			<!-- 置顶标签 -->
+            <div class="col-mb-12">
+                <nav id="nav-menu" class="clearfix" role="navigation">
+                    <a id="id_top_common_tag_home"
+						{{if eq .TopCommonTag "id_top_common_tag_home"}}
+						class="current"
+						{{end}} 
+						href="./index.html">首页
+					</a>
+					<a id="id_top_common_tag_about_me"
+						{{if eq .TopCommonTag "id_top_common_tag_about_me"}}
+						class="current"
+						{{end}} 
+						href="about_me.html" title="关于">关于
+					</a>
+                    <a id="id_top_common_tag_lab" 
+						{{if eq .TopCommonTag "id_top_common_tag_lab"}}
+						class="current"
+						{{end}} 
+						href="lab.html" title="我的实验室">我的实验室
+					</a>
+                </nav>
+            </div>
+        </div><!-- end .row -->
+    </div>
+</header><!-- end #header -->

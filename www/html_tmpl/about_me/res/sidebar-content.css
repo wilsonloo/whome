@@ -1,0 +1,57 @@
+/*
+Theme Name: Sixteen
+Layout: Sidebar-Content
+*/
+
+#secondary {
+	width: auto;
+	float: left;
+	padding-top:15px;
+	padding-left:15px;
+	padding-right:15px;
+	background: white;
+	clear:both;
+}
+
+#primary {
+	clear:both;
+	#width: 84%;
+	width:auto;
+	float: left;
+	padding-top: 15px;
+	padding-left:10px;
+	padding-right:1px;
+	position:relative;
+	/*left:-40px;*/
+	/*margin-right:1px;*/
+	/*background: #F0F7F8;*/
+	border-left-color:white;
+	border-left-style:groove;
+	border-left-width:1px;
+}
+
+div #my-horizonal-sidebar
+{
+	padding-top: 15px;
+	padding-left:10px;
+	padding-right:1px;
+	position:relative;
+	clear:both;
+	/* background-color:lightgray; */
+}
+
+div#my-horizonal-sidebar ul {
+    line-height: 20px;
+	margin:0px;
+}
+
+div#my-horizonal-sidebar ul div {
+    width: auto;
+    margin:0 0 15px 20px;
+    float:left;
+	max-width:300px;
+}
+
+div#my-horizonal-sidebar ul div.widget h2 {
+    margin-bottom: 15px;
+}

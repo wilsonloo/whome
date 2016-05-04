@@ -1,2 +1,0 @@
-// entrance.go
-package main

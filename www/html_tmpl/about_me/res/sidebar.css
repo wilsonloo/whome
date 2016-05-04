@@ -1,0 +1,72 @@
+#home-sidebar { 
+	overflow:hidden; 
+	clear:left; 
+	text-align:right; 
+	width:300px; 
+	height:auto; 
+	padding:0px 15px 0px 0px; 
+	border-right:1px dotted #3A3A3A; 
+	float:left;
+}/
+#home-sidebar li { list-style-type:none; }
+#home-sidebar > li { margin:20px 0px; }
+
+#home-sidebar h1 { border-bottom:1px dotted #3A3A3A; }
+#home-sidebar .description { 
+	display:block; 
+	width:100%; 
+	height:auto; 
+	margin:0px 0px 10px 0px; 
+	border-bottom:1px dotted #3A3A3A;
+}
+#home-sidebar .description-top-abstracts { 
+	display:block; 
+	width:100%; 
+	height:auto; 
+	margin:0px 0px 10px 0px; 
+	border-bottom:1px dotted #3A3A3A;
+	font-size: 8px;
+}
+#home-sidebar .description-top-abstracts-current { 
+	background-image: url("images/current.png");
+	background-repeat: no-repeat;
+	height:22px;
+}
+#home-sidebar .description-top-abstracts-early { 
+	background-image: url("images/early.png");
+	background-repeat: no-repeat;
+	height:22px;
+}
+#home-sidebar .description-top-abstracts-more-early { 
+	background-image: url("images/more_early.png");
+	background-repeat: no-repeat;
+	height:22px;
+}
+#home-sidebar .description-top-abstracts-normal{ 
+	height:22px;
+}
+#home-sidebar .description-top-abstracts-how-early-normal { 
+	margin:0px;
+	float:left;
+	clear:left;
+	width:45px;
+	height:20px;
+	border-right: 1px dotted red;
+}
+#home-sidebar .description-top-abstracts-how-early { 
+	margin:0px;
+	float:left;
+	clear:left;
+	width:45px;
+	height:20px;
+}
+#home-sidebar .description-top-abstracts-right-detial { 
+	margin:0px;
+	float:right;
+	clear:right;
+	height:20px;
+}
+
+#secondary aside ul li{
+	font-size: 80%;
+}

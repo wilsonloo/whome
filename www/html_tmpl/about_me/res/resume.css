@@ -1,0 +1,84 @@
+.career-D2code-img
+{
+	width:64px;
+	height:64px;
+	padding-bottom:176px;
+}
+
+.career-my-photo-img
+{
+	width:160px;
+	height:240px;
+}
+
+.career-float-left
+{
+	margin:0px;
+	float:left;
+}
+
+.career-float-right
+{
+	margin:0px;
+	float:right;
+}
+
+.career-one-line
+{
+	clear:both;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+#career-main
+{
+	/*width:900px;*/
+	padding-left:5px;
+	padding-bottom:50px;
+}
+
+.career-personal-base-info-what
+{
+	text-align:right;
+	padding-right:5px;
+	border-right:1px dotted;
+}
+
+.career-personal-base-info-value
+{
+	text-align:left;
+	padding-left:5px;
+}
+
+.career-setion-title
+{
+	background-color:rgb(170,213,226);
+}
+
+.career-work-at-where-what
+{
+	#background-color:rgb(194,194,219);
+}
+
+.career-project-info
+{
+	font-weight:bold;
+	#background-color:rgb(170,213,226);
+}
+
+.career-project-detail
+{
+	padding-bottom:15px;
+}
+
+.career-record-detail
+{
+
+}
+
+.career-record-detail p
+{
+	padding:0px 0px;
+	margin:0px;
+	font-size:12px;
+}
