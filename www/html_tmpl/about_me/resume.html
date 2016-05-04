@@ -22,12 +22,13 @@ document.write( m_url);
 			</table>
 		</div>
 		
-		<?php if( !isset( $PERSONAL_PHOTO_SHOWN ) ) {?>
+		{{if eq .ModuleDir "about_me"}}
+		{{else}}
 		<div class='career-float-right'><!--2D-code and photo-->
-			<img class='career-D2code-img' src='wp-admin/images/2d.code.www.wilson-loo.com.about.me.png' />
-			<img class='career-my-photo-img' src='wp-admin/images/my.resume.photo.jpg' />
+			<img class='career-D2code-img' src='/images/2d.code.www.wilson-loo.com.about.me.png' />
+			<img class='career-my-photo-img' src='/images/my.resume.photo.jpg' />
 		</div>
-		<?php }else{} ?>
+		{{end}}
 		
 	</div>
 	

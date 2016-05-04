@@ -53,6 +53,7 @@ type TemplateEngine struct {
 
 func (this *TemplateEngine) Dispatch(w http.ResponseWriter, r *http.Request, path string) {
 
+	// parse top segment
 	top_content := EchoView("top.html")
 
 	// get html file
@@ -66,7 +67,7 @@ var gTemplateEngine = &TemplateEngine{}
 
 func myServeHTTP(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	// dump_request(r)
+	dump_request(r)
 
 	g_session.ModuleDir = "home"
 	g_session.TopCommonTag = "id_top_common_tag_home"
@@ -122,6 +123,9 @@ func main() {
 	http.Handle("/css/", http.StripPrefix("/css/", fs_handler))
 
 	fs_handler = http.FileServer(http.Dir(www_root + "/res/img/"))
+	http.Handle("/images/", http.StripPrefix("/images/", fs_handler))
+
+	fs_handler = http.FileServer(http.Dir(www_root + "/res/img/"))
 	http.Handle("/favicon.ico", http.StripPrefix("/favicon.ico", fs_handler))
 
 	// my_http_server := &MyHttpServer{}
@@ -137,14 +141,52 @@ func EchoView(view_name string, args ...interface{}) string {
 	real_path := g_global_cfg["html_tmpl"] + "/" + view_name
 
 	// parse it
-	t := template.New("new template")
+	t := template.New("new2")
 	file_content, err := ioutil.ReadFile(real_path)
-	template.Must(t.Parse(string(file_content)))
 	CheckError(err)
+	template.Must(t.Parse(string(file_content)))
 
 	ret_buf := bytes.NewBufferString("")
 	t.Execute(ret_buf, g_session)
-	return ret_buf.String()
+	fmt.Println("the ret_buf size is ", ret_buf.Len())
+	ret_string := ret_buf.String()
+
+	// check if has nested templates
+	pref_flag := "[[include"
+	pref_flag_len := len(pref_flag)
+	fmt.Println("=== for page: ", real_path)
+	fmt.Println("content is ", len(ret_string))
+
+	for {
+
+		start_pos := strings.Index(ret_string, pref_flag)
+		if start_pos == -1 {
+			break
+		}
+
+		end_pos := strings.LastIndex(ret_string, "]]")
+		if end_pos == -1 {
+			break
+		}
+
+		// check if has target template as [[include xxx]]
+		if start_pos+pref_flag_len >= end_pos {
+			break
+		}
+
+		// get the nested template file
+		nested_view := ret_string[start_pos+pref_flag_len : end_pos]
+		fmt.Println("nested view is ", nested_view)
+		nested_view = strings.Trim(nested_view, " \t\"")
+		fmt.Println("nested view trimed is ", nested_view)
+		nested_string := EchoView(nested_view)
+
+		// replace old
+		old := ret_string[start_pos : end_pos+2]
+		fmt.Println("old is ", old)
+		ret_string = strings.Replace(ret_string, old, nested_string, -1)
+	}
+	return ret_string
 }
 
 /*
