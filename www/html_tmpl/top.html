@@ -47,20 +47,29 @@
 						{{if eq .TopCommonTag "id_top_common_tag_home"}}
 						class="current"
 						{{end}} 
-						href="./index.html">首页
+						href="/index.html">首页
 					</a>
 					<a id="id_top_common_tag_about_me"
 						{{if eq .TopCommonTag "id_top_common_tag_about_me"}}
 						class="current"
 						{{end}} 
-						href="about_me.html" title="关于">关于
+						href="/about_me.html" title="关于">关于
 					</a>
                     <a id="id_top_common_tag_lab" 
 						{{if eq .TopCommonTag "id_top_common_tag_lab"}}
 						class="current"
 						{{end}} 
-						href="lab.html" title="我的实验室">我的实验室
+						href="/lab.html" title="我的实验室">我的实验室
 					</a>
+					
+					{{if eq .IsAdmin true}}
+                    <a id="id_top_common_tag_add_article" 
+						{{if eq .TopCommonTag "id_top_common_tag_add_article"}}
+						class="current"
+						{{end}} 
+						href="/article/add.html" title="添加文章">添加文章
+					</a>
+					{{end}}
                 </nav>
             </div>
         </div><!-- end .row -->
