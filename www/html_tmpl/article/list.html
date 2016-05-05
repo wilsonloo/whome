@@ -1,0 +1,37 @@
+<div id="body">
+    <div class="container">
+        <div class="row" style="clear:both;">
+			<div class="col-mb-12" id="main" role="main" style="float:left;">
+			{{range .ArtListInfo.AList}}
+				
+		        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting" style="border-bottom-style: groove;">
+				<h2 class="post-title" itemprop="name headline">
+					<a itemtype="url" href="http://forthxu.com/blog/article/61.html">
+						{{.ArtReal.Title}}
+					</a>
+				</h2>
+				<ul class="post-meta">
+					<li>时间: <time datetime="2016-04-28T14:56:00+08:00" itemprop="datePublished">April 28, 2016</time></li>
+					<li>分类: <a href="http://forthxu.com/blog/category/default/">默认分类</a></li>
+					<li itemprop="interactionCount"><a itemprop="discussionUrl" href="http://forthxu.com/blog/article/61.html#comments">评论</a></li>
+					<li><a href="/article/list.html?op=delete&id={{.IDHex}}">删除</a></li>
+				</ul>
+				</article>
+			{{end}}
+        </div><!-- end .row -->
+    </div>
+</div><!-- end #body -->
+
+<footer id="footer" role="contentinfo">
+    © 2016 <a href="./惊蛰-云风skynet_files/惊蛰-云风skynet.html">惊蛰</a>.
+    由 <a href="http://www.typecho.org/">Typecho</a> 强力驱动.
+</footer><!-- end #footer -->
+
+
+
+
+
+<!--<input type="hidden" name="miguan_plugin_mode" id="miguan_plugin_mode" value="1">-->
+<!--载入方便扩展和维护代码-->
+
+</body><style type="text/css" id="74075317000"></style></html>

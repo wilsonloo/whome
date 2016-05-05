@@ -16,6 +16,7 @@ import (
 	"time"
 
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 var g_global_cfg map[string]string
@@ -45,10 +46,20 @@ type Person struct {
 	Name string
 }
 
+type ArticleWrapper struct {
+	ArtReal *Article
+	IDHex   string
+}
+
+type ArticleListInfo struct {
+	AList []ArticleWrapper
+}
+
 type Session struct {
 	ModuleDir    string
 	TopCommonTag string
 	IsAdmin      bool
+	ArtListInfo  *ArticleListInfo
 }
 
 var g_session Session
@@ -244,15 +255,28 @@ func HandleArticle(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 	if r.Form["op"] == nil {
-		// 仅仅显示
-		g_session.TopCommonTag = "id_top_common_tag_add_article"
-		Redirect(w, r, r.URL.Path)
 
+		// get target module name
+		end_pos := strings.LastIndex(r.URL.Path, ".html")
+		start_pos := strings.LastIndex(r.URL.Path, "/")
+		if start_pos != -1 && end_pos != -1 && start_pos < end_pos {
+			module_name := r.URL.Path[start_pos+1 : end_pos]
+			if len(module_name) > 0 {
+				switch module_name {
+				case "list":
+					list_articles(w, r)
+				case "add":
+					Redirect(w, r, "/article/add.html")
+				}
+			}
+		}
 	} else {
 		op := r.Form["op"][0]
 		switch op {
 		case "add":
 			add_article(w, r)
+		case "delete":
+			delete_article(w, r)
 		default:
 			http.Error(w, "unknown op", 404)
 		}
@@ -261,10 +285,69 @@ func HandleArticle(w http.ResponseWriter, r *http.Request) {
 }
 
 type Article struct {
+	Id         bson.ObjectId `bson:"_id"`
 	Title      string
 	Content    string
 	PostTime   string
 	ModifyTime string
+}
+
+func list_articles(w http.ResponseWriter, r *http.Request) {
+	//
+	g_session.TopCommonTag = "id_top_common_tag_article_list"
+
+	session := GetDBSession()
+	defer session.Clone()
+
+	c := session.DB("whome").C("article")
+	var art_list []Article
+	c.Find(nil).All(&art_list)
+
+	arlist_info := ArticleListInfo{}
+	g_session.ArtListInfo = &arlist_info
+	for _, v := range art_list {
+		fmt.Println("==================== inthe for")
+		aw := ArticleWrapper{}
+		aw.ArtReal = &v
+		aw.IDHex = v.Id.Hex()
+		arlist_info.AList = append(arlist_info.AList, aw)
+	}
+
+	fmt.Println("dumping lllllllllllllllllllllllllll")
+	for k, v := range g_session.ArtListInfo.AList {
+		fmt.Println(k, v)
+		fmt.Println(v.IDHex, v.ArtReal)
+	}
+	Redirect(w, r, r.URL.Path)
+}
+
+func delete_article(w http.ResponseWriter, r *http.Request) {
+	if r.Form["id"] == nil {
+		http.Error(w, "id not found", 404)
+		return
+	}
+
+	article_idx_hex := r.Form["id"][0]
+	if len(article_idx_hex) == 0 {
+		http.Error(w, "id not found", 404)
+		return
+	}
+
+	article_id := bson.ObjectIdHex(article_idx_hex)
+	// todo delete from db
+	session := GetDBSession()
+	defer session.Clone()
+
+	c := session.DB("whome").C("article")
+	err := c.RemoveId(article_id)
+	if err != nil {
+		http.Error(w, "error : "+err.Error(), 404)
+		return
+	}
+
+	// todo redirect
+	g_session.TopCommonTag = "id_top_common_tag_article_list"
+	Redirect(w, r, "/article/list.html")
 }
 
 func add_article(w http.ResponseWriter, r *http.Request) {
@@ -291,7 +374,7 @@ func add_article(w http.ResponseWriter, r *http.Request) {
 	defer session.Clone()
 
 	c := session.DB("whome").C("article")
-	err := c.Insert(&Article{title, content, time.Now().String(), time.Now().String()})
+	err := c.Insert(&Article{bson.NewObjectId(), title, content, time.Now().String(), time.Now().String()})
 	if err != nil {
 		log.Fatalln("failed to insert db")
 		http.Error(w, "failed to insert db", 404)

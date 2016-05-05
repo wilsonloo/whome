@@ -55,11 +55,11 @@
 						{{end}} 
 						href="/about_me.html" title="关于">关于
 					</a>
-                    <a id="id_top_common_tag_lab" 
-						{{if eq .TopCommonTag "id_top_common_tag_lab"}}
+					<a id="id_top_common_tag_article_list" 
+						{{if eq .TopCommonTag "id_top_common_tag_article_list"}}
 						class="current"
 						{{end}} 
-						href="/lab.html" title="我的实验室">我的实验室
+						href="/article/list.html" title="文章列表">文章列表
 					</a>
 					
 					{{if eq .IsAdmin true}}
@@ -70,6 +70,14 @@
 						href="/article/add.html" title="添加文章">添加文章
 					</a>
 					{{end}}
+					
+					
+                    <a id="id_top_common_tag_lab" 
+						{{if eq .TopCommonTag "id_top_common_tag_lab"}}
+						class="current"
+						{{end}} 
+						href="/lab.html" title="我的实验室">我的实验室
+					</a>
                 </nav>
             </div>
         </div><!-- end .row -->
